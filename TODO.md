@@ -1,0 +1,3 @@
+- [x] Edit WIN311 prog2.platformio.ini/template/base.html to correct CSS static paths from 'styles.css' to 'css/styles.css' etc.
+- [x] Edit win311/urls.py to add imports and static file serving for DEBUG mode
+- [x] Run python manage.py runserver to verify CSS and JS render correctly

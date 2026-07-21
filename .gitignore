@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.env
+.venv
+env/
+venv/
+WIN311 prog2.platformio.ini/venv/
+*.egg-info/
+*.egg
+
+# Django
+*.log
+*.pot
+local_settings.py
+db.sqlite3
+
+# Editor / IDE
+.vscode/
+.idea/
+
+# Render
+.renderignore
+
+# Local tool metadata
+.kilo/
+.kilocode/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,6 @@
+﻿services:
+  - type: web
+    name: win311-prog2
+    env: python
+    buildCommand: "python -m pip install -r requirements.txt"
+    startCommand: "gunicorn win311.wsgi:application --bind 0.0.0.0:$PORT"
