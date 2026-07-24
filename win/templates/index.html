@@ -1,0 +1,26 @@
+{% extends  'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="content">
+        <div class="fade-in-section">
+            <h1>WIN311</h1>
+        </div>
+        
+        <div class="fade-in-section">
+            <h2><strong> Engineering Intelligent Systems for the Future. </strong></h2>
+        </div>
+        
+        <div class="fade-in-section">
+            <p>WIN311 is a technology innovation company focused on designing advanced computational systems that transform industries through machine learning, scalable system architecture, and emerging technologies. The company builds intelligent platforms that empower organizations to operate more efficiently, make data-driven decisions, and embrace the future of digital innovation.</p>
+        </div>
+
+        <div class="fade-in-section">
+            <div class="cta-buttons">
+                <a href="{% url 'about' %}" class="btn-primary">Learn More</a>
+                <a href="{% url 'contact' %}" class="btn-secondary">Explore Our Technology.</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
