@@ -36,6 +36,7 @@ INSTALLED_APPS = [
 # -------------------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',   # <-- move here
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -43,6 +44,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 ROOT_URLCONF = 'win311.urls'
 
@@ -99,10 +106,8 @@ USE_TZ = True
 # Static files
 # -------------------------------
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'WIN311 prog2.platformio.ini', 'static')
-]
-
+STATICFILES_DIRS = [BASE_DIR / 'win' / 'static']  # only if static/ isn't inside an app Django already scans via APP_DIRS-style discovery
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # where collectstatic gathers everything for production
 # -------------------------------
 # Default primary key field type
 # -------------------------------
