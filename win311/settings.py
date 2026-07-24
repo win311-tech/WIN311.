@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent  # C:\Users\I .T\Downloads\WIN
 # -------------------------------
 SECRET_KEY = 'django-insecure-!zs$ydk#u=3oacyf3o@mov#)eiy)5y(8^psc$j5+3=b79@y%zs'
 DEBUG = True
-ALLOWED_HOSTS = ['win311-t3xb.onrender.com']
+ALLOWED_HOSTS = ['win311-t3xb.onrender.com', 'localhost', '127.0.0.1']
 
 # -------------------------------
 # Applications
