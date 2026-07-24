@@ -1,0 +1,231 @@
+/* Contact Page Specific Styles */
+
+.contact-page h1 {
+  color: #000;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  margin-bottom: 30px;
+}
+
+.contact-page h2 {
+  color: #000;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  text-align: center;
+  margin: 50px auto 30px;
+  font-weight: 700;
+}
+
+.contact-page h3 {
+  color: #000;
+  font-size: clamp(1.3rem, 3vw, 1.6rem);
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.contact-page p {
+  text-align: left;
+  margin: 20px auto;
+}
+
+/* Contact Info Section */
+.contact-info-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin: 40px auto;
+  max-width: 1000px;
+}
+
+.contact-card {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.contact-card p {
+  margin: 10px 0;
+  text-align: left;
+}
+
+.contact-card a {
+  color: #000;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-card a:hover {
+  color: #333;
+  text-decoration: underline;
+}
+
+/* Form Styles */
+.container {
+  border-radius: 10px;
+  background-color: rgba(242, 242, 242, 0.9);
+  padding: 30px;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+input[type=text],
+input[type=email],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input[type=text]:focus,
+input[type=email]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #000;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+  color: #000;
+  font-weight: 600;
+}
+
+input[type=submit] {
+  background-color: #000;
+  color: #fff;
+  padding: 14px 30px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+input[type=submit]:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Column sizes using flexbox (desktop) */
+.col-25 {
+  flex: 0 0 25%;
+  max-width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  flex: 1 1 75%;
+  max-width: 75%;
+  margin-top: 6px;
+}
+
+/* Clearfix fallback for any legacy floats */
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Tablet breakpoint: stack form rows and adjust container */
+@media screen and (max-width: 1024px) {
+  .contact-info-section {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .contact-card {
+    padding: 20px;
+  }
+
+  .container {
+    padding: 20px;
+    max-width: 90%;
+  }
+
+  .row {
+    display: block;
+  }
+
+  .col-25,
+  .col-75 {
+    float: none;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 8px;
+  }
+
+  input[type=submit] {
+    float: none;
+    width: 100%;
+    display: block;
+    margin-top: 12px;
+  }
+}
+
+/* Responsive Layout for smaller devices */
+@media screen and (max-width: 768px) {
+  .contact-info-section {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .contact-card {
+    padding: 20px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .col-25,
+  .col-75,
+  input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .col-25 {
+    margin-bottom: 5px;
+  }
+
+  input[type=submit] {
+    float: none;
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .contact-card {
+    padding: 15px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+}
