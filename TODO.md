@@ -1,3 +1,6 @@
-- [x] Edit WIN311 prog2.platformio.ini/template/base.html to correct CSS static paths from 'styles.css' to 'css/styles.css' etc.
-- [x] Edit win311/urls.py to add imports and static file serving for DEBUG mode
-- [x] Run python manage.py runserver to verify CSS and JS render correctly
+# Render Deploy Fix - Task List
+
+- [ ] 1. Fix requirements.txt - Remove desktop-only packages, fix gunicorn version
+- [ ] 2. Fix settings.py - ALLOWED_HOSTS, DEBUG env var, SECURE_PROXY_SSL_HEADER
+- [ ] 3. Update FIXES_APPLIED.md with new fixes
+
