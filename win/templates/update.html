@@ -1,61 +1,10 @@
-{% extends  'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
+{% block title %}WIN311 | Areas of focus{% endblock %}
 {% block content %}
-
-<div class="content update-page">
-        <div class="fade-in-section">
-            <h1>Stay Informed with Our Latest Updates</h1>
-        </div>
-
-        <div class="fade-in-section">
-    <p>WIN311’s mission is to design and deploy powerful technological systems that enable organizations to operate more intelligently, efficiently, and securely.
-
-The company fulfills this mission by:
-
-• Engineering scalable software systems
-• Developing machine-learning-driven platforms
-• Building robust digital infrastructures
-• Applying advanced technologies to real-world challenges
-
-Through continuous innovation and research, WIN311 seeks to bridge the gap between technological capability and practical application.</p>
-        </div>
-
-        <div class="fade-in-section">
-            <p>Technological Leadership
-
-Develop advanced systems that demonstrate the practical power of machine learning, intelligent automation, and system architecture.
-
-Industry Transformation
-
-Deliver technological solutions that significantly improve efficiency and decision-making across multiple sectors including healthcare and enterprise systems.
-Global Expansion
-
-Position WIN311 as an internationally recognized technology brand delivering impactful technological innovations.
-
-Continuous Innovation
-
-Maintain a culture of research, experimentation, and engineering excellence to remain at the forefront of technological advancement.</p>
-        </div>
-
-        <div class="fade-in-section">
-            <p>Research & Innovation
-
-Innovation lies at the core of WIN311’s philosophy. The company continuously invests in research and development to explore new technological possibilities and develop systems that address complex challenges.
-
-Current innovation initiatives include the development of intelligent healthcare technologies such as the Clarity medical diagnostic system, as well as research into robotics integration and advanced computational systems.
-
-Through these initiatives, WIN311 aims to contribute to the evolution of intelligent technologies capable of shaping the future.</p>
-        </div>
-
-        <div class="fade-in-section">
-            <div class="update-cta">
-                <h3>Check Back Soon!</h3>
-                <p>We're constantly working on new features and improvements. Subscribe to our newsletter to get notified of updates.</p>
-            </div>
-        </div>
-
-        <div class="fade-in-section">
-            <a href="{% url 'index' %}" class="back-link">← Back to Home</a>
-        </div>
-    </div>
+<div class="inner-page update-page">
+    <section class="inner-hero"><span class="eyebrow">WIN311 / AREAS OF FOCUS</span><h1>Building with <em>purpose and progress.</em></h1><p>Our work brings practical technology services and systems thinking together. We keep learning, refining our approach and exploring where technology can make a useful difference.</p></section>
+    <section class="inner-section"><div class="section-heading"><div><span class="eyebrow">WHAT WE’RE WORKING TOWARDS</span><h2>Technology with a<br>clear reason to exist.</h2></div><p>We focus on technology that addresses defined needs and can be understood, used and maintained.</p></div><div class="capability-grid"><article class="capability-card"><span>SYSTEMS</span><div class="tile-photo"><img src="{% static 'images/stock/systems.jpg' %}" alt="Digital infrastructure and connected equipment" loading="lazy" decoding="async"></div><h3>Connected digital infrastructure</h3><p>Planning and developing systems that help organisations manage workflows and information.</p></article><article class="capability-card"><span>SERVICES</span><div class="tile-photo"><img src="{% static 'images/stock/web-development.jpg' %}" alt="Laptop with software code on screen" loading="lazy" decoding="async"></div><h3>Useful technology support</h3><p>Providing scoped services that help individuals and smaller organisations meet practical needs.</p></article><article class="capability-card"><span>LEARNING</span><div class="tile-photo"><img src="{% static 'images/stock/training.jpg' %}" alt="A student practising on a laptop" loading="lazy" decoding="async"></div><h3>Research and exploration</h3><p>Exploring emerging technologies and assessing where they may be appropriate for real problems.</p></article><article class="capability-card"><span>DELIVERY</span><div class="tile-photo"><img src="{% static 'images/stock/project-management.jpg' %}" alt="Colleagues planning their project together" loading="lazy" decoding="async"></div><h3>Clearer project journeys</h3><p>Keeping scope, communication, verification and handover visible throughout the work.</p></article></div></section>
+    <section class="closing-cta inner-cta"><div><span class="eyebrow">HAVE A QUESTION?</span><h2>Talk with our team.</h2><p>We’re happy to hear what you’re building and where you need support.</p></div><a class="button button-light" href="{% url 'contact' %}">Contact WIN311 <span>↗</span></a></section>
+</div>
 {% endblock %}
