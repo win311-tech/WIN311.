@@ -1,26 +1,40 @@
-{% extends  'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
+{% block title %}WIN311 | Intelligent systems, practical services{% endblock %}
 {% block content %}
-
-    <div class="content">
-        <div class="fade-in-section">
-            <h1>WIN311</h1>
-        </div>
-        
-        <div class="fade-in-section">
-            <h2><strong> Engineering Intelligent Systems for the Future. </strong></h2>
-        </div>
-        
-        <div class="fade-in-section">
-            <p>WIN311 is a technology innovation company focused on designing advanced computational systems that transform industries through machine learning, scalable system architecture, and emerging technologies. The company builds intelligent platforms that empower organizations to operate more efficiently, make data-driven decisions, and embrace the future of digital innovation.</p>
-        </div>
-
-        <div class="fade-in-section">
-            <div class="cta-buttons">
-                <a href="{% url 'about' %}" class="btn-primary">Learn More</a>
-                <a href="{% url 'contact' %}" class="btn-secondary">Explore Our Technology.</a>
+<div class="home-page">
+    <section class="hero-shell">
+        <div class="hero-copy">
+            <span class="eyebrow">TECHNOLOGY, WITH INTENTION</span>
+            <h1>Engineering intelligent systems <span>for the future.</span></h1>
+            <p class="hero-lede">From practical technology services for growing businesses to connected systems built for complex organisations, WIN311 helps turn ambitious needs into working solutions.</p>
+            <div class="hero-actions">
+                <a class="button button-dark" href="{% url 'systems' %}">Explore WIN311 Systems <span>↗</span></a>
+                <a class="button button-glass" href="{% url 'services' %}">Explore WIN311 Services <span>↗</span></a>
             </div>
+            <div class="hero-note"><span class="note-line"></span><span>One technology partner.<br>Two ways to move forward.</span></div>
         </div>
-    </div>
-{% endblock %}
+        <div class="hero-visual" aria-hidden="true">
+            <div class="orb orb-back"></div><div class="orb orb-front"></div>
+            <div class="glass-panel panel-main"><span class="panel-kicker">WIN311 / SYSTEMS</span><div class="system-mark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="panel-caption">Thoughtful technology.<br>Connected by design.</span></div>
+            <div class="glass-panel panel-float"><span class="float-icon">✳</span><span>Ideas into<br><strong>systems that work.</strong></span></div>
+        </div>
+    </section>
 
+    <section class="section-shell pathways-section" id="pathways">
+        <div class="section-heading"><div><span class="eyebrow">FIND YOUR WAY IN</span><h2>What are you<br>looking to build?</h2></div><p>Start with the scale of the challenge. We’ll help you find the right way to work with WIN311.</p></div>
+        <div class="pathway-grid">
+            <a class="pathway-card systems-card" href="{% url 'systems' %}"><span class="card-label">WIN311 SYSTEMS</span><div class="tile-photo"><img src="{% static 'images/stock/systems.jpg' %}" alt="Connected equipment inside a modern data centre" loading="lazy" decoding="async"></div><h3>For connected, complex needs.</h3><p>System architecture, integration and platforms for organisations with important workflows and operations.</p><span class="card-bottom"><span>For organisations &amp; institutions</span><span class="arrow-circle">↗</span></span></a>
+            <a class="pathway-card services-card" href="{% url 'services' %}"><span class="card-label">WIN311 SERVICES</span><div class="tile-photo"><img src="{% static 'images/stock/web-development.jpg' %}" alt="Laptop displaying a web development workspace" loading="lazy" decoding="async"></div><h3>For a specific technology need.</h3><p>Clearly scoped services for individuals, startups and growing businesses—delivered with care.</p><span class="card-bottom"><span>For individuals &amp; small businesses</span><span class="arrow-circle">↗</span></span></a>
+        </div>
+    </section>
+
+    <section class="systems-preview section-shell"><div class="preview-copy"><span class="eyebrow">WIN311 SYSTEMS</span><h2>Make every part<br>work <em>together.</em></h2><p>When teams, tools and information need to connect, we help shape the architecture and build the systems that keep work moving.</p><a class="text-link" href="{% url 'systems' %}">See how we work <span>↗</span></a></div><div class="preview-visual" aria-hidden="true"><div class="network-ring ring-one"></div><div class="network-ring ring-two"></div><div class="network-ring ring-three"></div><div class="network-center">W</div><span class="node node-a">DATA</span><span class="node node-b">PEOPLE</span><span class="node node-c">SYSTEMS</span><span class="node node-d">PROCESS</span></div></section>
+
+    <section class="services-preview section-shell"><div class="section-heading"><div><span class="eyebrow">WIN311 SERVICES</span><h2>Good technology,<br>made approachable.</h2></div><a class="text-link" href="{% url 'services' %}">View all services <span>↗</span></a></div><div class="service-chips"><span>Web Development</span><span>Networking</span><span>System Design</span><span>IT Training</span><span>IP Camera Installations</span><span>IT Monitoring</span><span>Database Management</span><span>Project Management</span></div></section>
+
+    <section class="approach-section section-shell"><span class="eyebrow">A CLEAR WAY FORWARD</span><h2>From first conversation<br>to <em>working solution.</em></h2><div class="steps-grid"><div><h3>Understand</h3><p>We listen to the need, context and outcome you have in mind.</p></div><div><h3>Define</h3><p>We agree the scope and a practical way to approach the work.</p></div><div><h3>Build</h3><p>We develop, configure or integrate the solution and check it works.</p></div><div><h3>Hand over</h3><p>We share the result clearly, with support options where useful.</p></div></div></section>
+
+    <section class="closing-cta section-shell closing-cta-home"><img class="closing-cta-photo" src="{% static 'images/stock/home-cta.jpg' %}" alt="" aria-hidden="true" loading="lazy" decoding="async"><div class="closing-cta-copy"><span class="eyebrow">LET’S MAKE IT WORK</span><h2>Have a need in mind?</h2><p>Tell us what you’re trying to achieve. We’ll help you find the right next step.</p></div><a class="button button-light" href="{% url 'contact' %}">Discuss a project <span>↗</span></a></section>
+</div>
+{% endblock %}

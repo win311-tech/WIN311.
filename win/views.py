@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.contrib import messages
 from django.http import JsonResponse
 from .forms import ContactForm
 from .services.contact_service import store_contact_message
@@ -14,23 +15,40 @@ def get_client_ip(request):
 def contact_view(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
+        is_ajax = request.headers.get("X-Requested-With") == "XMLHttpRequest"
         if not form.is_valid():
-            return JsonResponse({
-                "status": "errors",
-                "errors": form.errors}, status=400)
+            if is_ajax:
+                return JsonResponse({
+                    "status": "errors",
+                    "errors": form.errors}, status=400)
+            return render(request, 'contact.html', {'form': form}, status=400)
 
         ip_address = get_client_ip(request)
         store_contact_message(form.cleaned_data, ip_address)
-        return JsonResponse({
-            "status": "success",
-            "message": "Your message has been received. Thank you!"})
+        if is_ajax:
+            return JsonResponse({
+                "status": "success",
+                "message": "Your enquiry has been received. Thank you!"})
+        messages.success(request, "Your enquiry has been received. Thank you!")
+        return redirect('contact')
 
-    return render(request,'contact.html',{'form':ContactForm()})
+    return render(request,'contact.html',{'form':ContactForm(initial={
+        'division': request.GET.get('division', 'general'),
+        'category': request.GET.get('category', ''),
+    })})
 
 
 
 def index(request):
     return render(request,'index.html')
+
+
+def systems(request):
+    return render(request, 'systems.html')
+
+
+def services(request):
+    return render(request, 'services.html')
 
 
 

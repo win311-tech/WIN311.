@@ -4,31 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage | WIN311</title>
+    <meta name="theme-color" content="#e5e6e4">
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+    <title>{% block title %}WIN311 | Engineering Intelligent Systems{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/contact.css' %}">
     <link rel="stylesheet" href="{% static 'css/about.css' %}">
     <link rel="stylesheet" href="{% static 'css/update.css' %}">
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
 </head>
 <body>
-    <!-- Hamburger Icon -->
-    <span class="hamburger" onclick="toggleNav()">&#9776;</span>
-
-    <!-- Menu Overlay -->
-    <div class="menu-overlay" id="menuOverlay" onclick="closeNav()"></div>
-
-    <!-- Hamburger Menu Container -->
-    <div class="side-menu" id="navbar">
-        <ul class="sidenav">
-            <li><a class="active" href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'update' %}">Update Information</a></li>
-            <li><a href="{% url 'contact' %}">Contact</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-        </ul>
-    </div>
-
-    {% block content %}{% endblock %}
-
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <a class="wordmark" href="{% url 'index' %}" aria-label="WIN311 home">WIN<span>311</span><i></i></a>
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navbar"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span><span class="menu-word">Menu</span></button>
+        <div class="menu-overlay" id="menuOverlay"></div>
+        <nav class="side-menu" id="navbar" aria-label="Main navigation">
+            <div class="menu-top"><span>Navigate</span><button class="menu-close" type="button" aria-label="Close navigation">×</button></div>
+            <ul class="sidenav">
+                <li><a class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}" {% if request.resolver_match.url_name == 'index' %}aria-current="page"{% endif %} href="{% url 'index' %}">Home</a></li>
+                <li><a class="{% if request.resolver_match.url_name == 'systems' %}active{% endif %}" {% if request.resolver_match.url_name == 'systems' %}aria-current="page"{% endif %} href="{% url 'systems' %}">Systems</a></li>
+                <li><a class="{% if request.resolver_match.url_name == 'services' %}active{% endif %}" {% if request.resolver_match.url_name == 'services' %}aria-current="page"{% endif %} href="{% url 'services' %}">Services</a></li>
+                <li><a class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}" {% if request.resolver_match.url_name == 'about' %}aria-current="page"{% endif %} href="{% url 'about' %}">About</a></li>
+                <li><a class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}" {% if request.resolver_match.url_name == 'contact' %}aria-current="page"{% endif %} href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+            <a class="nav-cta" href="{% url 'contact' %}">Discuss a project <span>↗</span></a>
+        </nav>
+    </header>
+    <main id="main-content">{% block content %}{% endblock %}</main>
+    <footer class="site-footer"><a class="wordmark footer-mark" href="{% url 'index' %}">WIN<span>311</span><i></i></a><span>Engineering Intelligent Systems for the Future.</span><a href="{% url 'contact' %}">Start a conversation ↗</a></footer>
     <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

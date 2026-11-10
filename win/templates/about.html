@@ -1,62 +1,10 @@
-{% extends  'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
+{% block title %}About WIN311 | Technology built around real needs{% endblock %}
 {% block content %}
-
-<div class="content about-page">
-        <div class="fade-in-section">
-            <h1>ABOUT WIN311</h1>
-        </div>
-
-        <div class="fade-in-section">
-            <p>WIN311 is a forward-thinking technology company dedicated to developing intelligent systems that solve complex real-world problems. The company focuses on building scalable digital infrastructures, machine-learning-driven platforms, and advanced technological solutions that support organizations in navigating an increasingly digital world.</p>
-        </div>
-
-        <div class="fade-in-section">
-        <p>WIN311 operates with a strong emphasis on innovation, engineering excellence, and long-term technological impact. By combining software engineering expertise with forward-looking research, the company develops solutions capable of transforming industries and improving operational efficiency.</p>
-        </div>
-
-        <div class="fade-in-section">
-            <p>
-
-WIN311 designs and develops advanced computational systems that leverage machine learning, data analytics, and intelligent automation to support complex decision-making processes across industries.
-
-System Architecture & Digital Infrastructure
-
-The company builds scalable system architectures that enable organizations to manage large volumes of data, automate workflows, and maintain secure digital operations.</p>
-        </div>
-
-        <div class="fade-in-section">
-            <p class="mission-statement">Join us on our mission to transform the way agencies operate—because at WIN311, your success is our priority.</p>
-        </div>
-
-        <div class="fade-in-section">
-            <h2>OUR TARGET AUDIENCE</h2>
-        </div>
-
-        <div class="fade-in-section">
-            <div class="audience-card">
-                <h3>Intelligent Systems Development</h3>
-                <p>WIN311 designs and develops advanced computational systems that leverage machine learning, data analytics, and intelligent automation to support complex decision-making processes across industries.The company is committed to exploring emerging technological frontiers including robotics integration and automated systems that enhance productivity and expand the capabilities of modern digital environments.</p>
-            </div>
-        </div>
-
-        <div class="fade-in-section">
-            <div class="audience-card">
-                <h3>System Architecture & Digital Infrastructure</h3>
-                <p>The company builds scalable system architectures that enable organizations to manage large volumes of data, automate workflows, and maintain secure digital operations.</p>
-            </div>
-        </div>
-
-        <div class="fade-in-section">
-            <div class="audience-card">
-                <h3>Healthcare Technology Innovation</h3>
-                <p>WIN311 is actively developing advanced healthcare systems such as the Clarity diagnostic platform, designed to assist healthcare professionals in analyzing medical imaging data and supporting diagnostic decision-making.</p>
-            </div>
-        </div>
-
-        <div class="fade-in-section">
-            <a href="{% url 'index' %}" class="back-link">← Back to Home</a>
-        </div>
-    </div>
-
+<div class="inner-page about-page">
+    <section class="inner-hero"><span class="eyebrow">WIN311 / ABOUT</span><h1>Technology should make <em>good work possible.</em></h1><p>WIN311 designs and delivers technology solutions that help people and organisations work with more clarity, connection and confidence.</p></section>
+    <section class="inner-section"><div class="section-heading"><div><span class="eyebrow">WHAT GUIDES US</span><h2>Useful by design.<br>Thoughtful in practice.</h2></div><p>Every project starts with a real need. We work to understand the context, choose an appropriate approach, and make the result useful for the people who rely on it.</p></div><div class="capability-grid"><article class="capability-card"><span>CLARITY</span><div class="tile-photo"><img src="{% static 'images/stock/project-management.jpg' %}" alt="Colleagues working through a shared project plan" loading="lazy" decoding="async"></div><h3>Understand before building</h3><p>We begin with the people, processes and goals behind the request so the solution fits the work.</p></article><article class="capability-card"><span>CRAFT</span><div class="tile-photo"><img src="{% static 'images/stock/web-development.jpg' %}" alt="A carefully arranged software development workspace" loading="lazy" decoding="async"></div><h3>Build with care</h3><p>We value clear structure, reliable implementation and technology that can be maintained.</p></article><article class="capability-card"><span>FIT</span><div class="tile-photo"><img src="{% static 'images/stock/systems.jpg' %}" alt="Connected data centre infrastructure" loading="lazy" decoding="async"></div><h3>Choose the right scale</h3><p>Some needs call for a focused service. Others need connected systems. We help distinguish the two.</p></article><article class="capability-card"><span>PARTNERSHIP</span><div class="tile-photo"><img src="{% static 'images/stock/training.jpg' %}" alt="An individual learning with a laptop" loading="lazy" decoding="async"></div><h3>Make the next step clear</h3><p>We keep communication practical, agree scope early and make handover part of the work.</p></article></div></section>
+    <section class="closing-cta inner-cta"><div><span class="eyebrow">ENGINEERING INTELLIGENT SYSTEMS FOR THE FUTURE</span><h2>Let’s build what’s useful.</h2><p>Tell us what you’re working towards and we’ll help identify the right path.</p></div><a class="button button-light" href="{% url 'contact' %}">Start a conversation <span>↗</span></a></section>
+</div>
 {% endblock %}

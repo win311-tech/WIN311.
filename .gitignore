@@ -17,6 +17,8 @@ WIN311 prog2.platformio.ini/venv/
 *.pot
 local_settings.py
 db.sqlite3
+staticfiles/
+media/
 
 # Editor / IDE
 .vscode/

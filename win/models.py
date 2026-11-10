@@ -5,6 +5,9 @@ from django.db import models
 class ContactMessage(models.Model):
     name = models.CharField(max_length=150)
     email = models.EmailField()
+    organisation = models.CharField(max_length=180, blank=True)
+    division = models.CharField(max_length=40, default='general')
+    category = models.CharField(max_length=80, blank=True)
     message = models.TextField()
     ip_address = models.GenericIPAddressField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
