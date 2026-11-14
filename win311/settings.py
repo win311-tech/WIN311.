@@ -11,6 +11,16 @@ from pathlib import Path
 # -------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent  # C:\Users\I .T\Downloads\WIN311 prog2.platformio.inii
 
+# Load local development settings from the ignored .env file. Production
+# deployments should provide these values through their environment.
+ENV_FILE = BASE_DIR / ".env"
+if ENV_FILE.exists():
+    for line in ENV_FILE.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            key, value = line.split("=", 1)
+            os.environ.setdefault(key.strip(), value.strip().strip("\"'"))
+
 # -------------------------------
 # Security
 # -------------------------------
@@ -112,3 +122,9 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'  # where collectstatic gathers everything
 # Default primary key field type
 # -------------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Brevo transactional email
+BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
+BREVO_SENDER_EMAIL = os.environ.get("BREVO_SENDER_EMAIL", "winfrednartey07@gmail.com")
+BREVO_SENDER_NAME = os.environ.get("BREVO_SENDER_NAME", "WIN311 Website")
+CONTACT_RECIPIENT_EMAIL = os.environ.get("CONTACT_RECIPIENT_EMAIL", "winfrednartey07@gmail.com")
