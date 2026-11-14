@@ -8,6 +8,6 @@
       - key: BREVO_API_KEY
         sync: false
       - key: BREVO_SENDER_EMAIL
-        value: winfrednartey07@gmail.com
+        value: win311tech@gmail.com
       - key: CONTACT_RECIPIENT_EMAIL
-        value: winfrednartey07@gmail.com
+        value: win311tech@gmail.com
