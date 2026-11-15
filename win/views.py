@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.http import JsonResponse
 from .forms import ContactForm
-from .services.contact_service import store_contact_message
+from .services.contact_service import send_contact_email, store_contact_message
 
 
 def get_client_ip(request):
@@ -25,6 +25,12 @@ def contact_view(request):
 
         ip_address = get_client_ip(request)
         store_contact_message(form.cleaned_data, ip_address)
+        if not send_contact_email(form.cleaned_data):
+            error_message = "We couldn't send your enquiry right now. Please try again shortly or email us directly."
+            if is_ajax:
+                return JsonResponse({"status": "error", "message": error_message}, status=502)
+            messages.error(request, error_message)
+            return render(request, 'contact.html', {'form': form}, status=502)
         if is_ajax:
             return JsonResponse({
                 "status": "success",
