@@ -1,0 +1,30 @@
+{% autoescape on %}
+<!doctype html>
+<html lang="en">
+<body style="margin:0;padding:16px;background:#ffffff;color:#000000;font-family:Arial,Helvetica,sans-serif;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:620px;margin:0 auto;border-collapse:collapse;background:#ffffff;color:#000000;font-family:Arial,Helvetica,sans-serif;">
+        <tr><td style="padding:20px;border:1px solid #e5e5e5;">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;margin:0 0 22px;font-family:Arial,Helvetica,sans-serif;">
+            <tr>
+                <td style="padding:0 12px 0 0;vertical-align:middle;"><img src="{{ favicon_url }}" width="36" height="36" alt="WIN311 company logo" style="display:block;width:36px;height:36px;border:0;"></td>
+                <td style="padding:0 0 0 12px;border-left:2px solid #777d75;vertical-align:middle;color:#000000;">
+                    <p style="margin:0;color:#000000;font-size:16px;font-weight:bold;line-height:1.2;letter-spacing:1px;">WIN311</p>
+                    <p style="margin:3px 0 0;color:#000000;font-size:10px;font-weight:bold;line-height:1.2;letter-spacing:1.5px;">CONTACT</p>
+                </td>
+            </tr>
+        </table>
+        <h1 style="margin:0 0 24px;color:#000000;font-size:24px;line-height:1.25;">New enquiry received</h1>
+        <table style="width:100%;border-collapse:collapse;color:#000000;font-size:14px;line-height:1.6;font-family:Arial,Helvetica,sans-serif;">
+            <tr><th align="left" style="padding:8px 12px 8px 0;color:#333333;">Name</th><td style="padding:8px 0;">{{ submission.name }}</td></tr>
+            <tr><th align="left" style="padding:8px 12px 8px 0;color:#333333;">Email</th><td style="padding:8px 0;word-break:break-all;overflow-wrap:anywhere;">{{ submission.email }}</td></tr>
+            <tr><th align="left" style="padding:8px 12px 8px 0;color:#333333;">Organisation</th><td style="padding:8px 0;">{{ submission.organisation|default:"Not provided" }}</td></tr>
+            <tr><th align="left" style="padding:8px 12px 8px 0;color:#333333;">Enquiry type</th><td style="padding:8px 0;">{{ division_label }}</td></tr>
+            <tr><th align="left" style="padding:8px 12px 8px 0;color:#333333;">Service</th><td style="padding:8px 0;">{{ submission.category|default:"Not specified" }}</td></tr>
+        </table>
+        <h2 style="margin:24px 0 8px;color:#000000;font-size:15px;">Message</h2>
+        <p style="margin:0;white-space:pre-wrap;word-break:break-all;overflow-wrap:anywhere;font-size:14px;line-height:1.7;">{{ submission.message }}</p>
+        </td></tr>
+    </table>
+</body>
+</html>
+{% endautoescape %}

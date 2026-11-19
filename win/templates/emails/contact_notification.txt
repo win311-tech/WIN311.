@@ -1,0 +1,12 @@
+{% autoescape off %}
+New enquiry received through the WIN311 contact form
+
+Name: {{ submission.name }}
+Email: {{ submission.email }}
+Organisation: {{ submission.organisation|default:"Not provided" }}
+Enquiry type: {{ division_label }}
+Service: {{ submission.category|default:"Not specified" }}
+
+Message:
+{{ submission.message }}
+{% endautoescape %}

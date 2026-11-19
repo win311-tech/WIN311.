@@ -72,3 +72,10 @@
 - If the navbar still doesn't work in your browser, make sure to **hard refresh** (Ctrl+F5) or **clear browser cache**
 - The server must be running on http://127.0.0.1:8000/
 - All static files are being served correctly from `WIN311 prog2.platformio.ini/static/`
+
+## Render and PostgreSQL Deployment
+
+- Django loads the local PostgreSQL `DATABASE_URL` from `.env`; deployment settings require a PostgreSQL URL and no longer fall back to SQLite.
+- Add the same PostgreSQL connection URL to Render's `DATABASE_URL` environment variable. Keep its credentials in Render's environment settings, not in `render.yaml` or source control.
+- Set `SECRET_KEY` in Render and keep `DEBUG=false`. The Render configuration also sets the allowed host, trusted HTTPS origin, forwarded-proxy HTTPS header, and production HTTPS security settings.
+- Render installs the PostgreSQL driver and database URL parser, collects static files during the build, and applies Django migrations before starting Gunicorn.

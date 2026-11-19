@@ -1,52 +1,15 @@
-from django.shortcuts import render,redirect
-from django.contrib import messages
-from django.http import JsonResponse
+from django.shortcuts import redirect, render
+
 from .forms import ContactForm
-from .services.contact_service import send_contact_email, store_contact_message
+from .services.contact_service import submit_contact_message
 
 
 def get_client_ip(request):
-    x_forwarded = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded:
-        return x_forwarded.split(',')[0]
     return request.META.get('REMOTE_ADDR')
 
 
-def contact_view(request):
-    if request.method == "POST":
-        form = ContactForm(request.POST)
-        is_ajax = request.headers.get("X-Requested-With") == "XMLHttpRequest"
-        if not form.is_valid():
-            if is_ajax:
-                return JsonResponse({
-                    "status": "errors",
-                    "errors": form.errors}, status=400)
-            return render(request, 'contact.html', {'form': form}, status=400)
-
-        ip_address = get_client_ip(request)
-        store_contact_message(form.cleaned_data, ip_address)
-        if not send_contact_email(form.cleaned_data):
-            error_message = "We couldn't send your enquiry right now. Please try again shortly or email us directly."
-            if is_ajax:
-                return JsonResponse({"status": "error", "message": error_message}, status=502)
-            messages.error(request, error_message)
-            return render(request, 'contact.html', {'form': form}, status=502)
-        if is_ajax:
-            return JsonResponse({
-                "status": "success",
-                "message": "Your enquiry has been received. Thank you!"})
-        messages.success(request, "Your enquiry has been received. Thank you!")
-        return redirect('contact')
-
-    return render(request,'contact.html',{'form':ContactForm(initial={
-        'division': request.GET.get('division', 'general'),
-        'category': request.GET.get('category', ''),
-    })})
-
-
-
 def index(request):
-    return render(request,'index.html')
+    return render(request, 'index.html')
 
 
 def systems(request):
@@ -62,14 +25,35 @@ def services(request):
 
 
 def about(request):
-    return render(request,'about.html')
+    return render(request, 'about.html')
 
 
+def contact_view(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            result = submit_contact_message(
+                form.cleaned_data,
+                ip_address=get_client_ip(request),
+                request=request,
+            )
+            if result.delivered:
+                request.session["contact_enquiry_sent"] = True
+                return redirect("contact")
 
-def contact(request):
-    return render(request,'contact.html')
+            form.add_error(
+                None,
+                "Your enquiry was saved, but we couldn't send it just now. "
+                "Please try again later or email us directly.",
+            )
+            return render(request, "contact.html", {"form": form})
+    else:
+        form = ContactForm()
+
+    sent = request.session.pop("contact_enquiry_sent", False)
+    return render(request, "contact.html", {"form": form, "sent": sent})
 
 
 
 def update(request):
-    return render(request,'update.html')
+    return render(request, 'update.html')

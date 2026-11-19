@@ -1,0 +1,25 @@
+{% autoescape on %}
+<!doctype html>
+<html lang="en">
+<body style="margin:0;padding:16px;background:#ffffff;color:#000000;font-family:Arial,Helvetica,sans-serif;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:620px;margin:0 auto;border-collapse:collapse;background:#ffffff;color:#000000;font-family:Arial,Helvetica,sans-serif;">
+        <tr><td style="padding:20px;border:1px solid #e5e5e5;">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;margin:0 0 22px;font-family:Arial,Helvetica,sans-serif;">
+            <tr>
+                <td style="padding:0 12px 0 0;vertical-align:middle;"><img src="{{ favicon_url }}" width="36" height="36" alt="WIN311 company logo" style="display:block;width:36px;height:36px;border:0;"></td>
+                <td style="padding:0 0 0 12px;border-left:2px solid #777d75;vertical-align:middle;color:#000000;">
+                    <p style="margin:0;color:#000000;font-size:16px;font-weight:bold;line-height:1.2;letter-spacing:1px;">WIN311</p>
+                    <p style="margin:3px 0 0;color:#000000;font-size:10px;font-weight:bold;line-height:1.2;letter-spacing:1.5px;">CONTACT</p>
+                </td>
+            </tr>
+        </table>
+        <h1 style="margin:0 0 18px;color:#000000;font-size:24px;line-height:1.25;">Thanks for getting in touch.</h1>
+        <p style="margin:0;color:#000000;font-size:14px;line-height:1.7;">Hello {{ submission.name }}, we have received and reserved your enquiry. Our team will reply as soon as we can.</p>
+        <h2 style="margin:24px 0 8px;color:#000000;font-size:15px;">Your message</h2>
+        <p style="margin:0;white-space:pre-wrap;word-break:break-all;overflow-wrap:anywhere;font-size:14px;line-height:1.7;">{{ submission.message }}</p>
+        <p style="margin:26px 0 0;color:#333333;font-size:12px;">WIN311 · Engineering Intelligent Systems for the Future</p>
+        </td></tr>
+    </table>
+</body>
+</html>
+{% endautoescape %}

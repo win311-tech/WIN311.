@@ -1,0 +1,10 @@
+{% autoescape off %}
+Hello {{ submission.name }},
+
+Thank you for contacting WIN311. We have received and reserved your enquiry. Our team will reply as soon as we can.
+
+Your message:
+{{ submission.message }}
+
+WIN311
+{% endautoescape %}
