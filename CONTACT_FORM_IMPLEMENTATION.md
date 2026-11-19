@@ -30,12 +30,13 @@ settings are declared in `render.yaml`):
 - `BREVO_SMTP_KEY` (Brevo SMTP key, not the API key)
 - `BREVO_SMTP_USE_TLS`
 - `BREVO_SMTP_USE_SSL`
-- `DEFAULT_FROM_EMAIL`
-- `CONTACT_RECIPIENT_EMAIL`
 
 For local development, set the same values in the ignored local environment
-file or process environment. `DEFAULT_FROM_EMAIL` must be a sender verified in
-Brevo. Google Console OAuth settings are not used by this SMTP configuration.
+file or process environment. The sender and recipient addresses default to
+`win311tech@gmail.com` in Django settings, so they do not need Render
+environment variables. You can optionally override them with
+`DEFAULT_FROM_EMAIL` or `CONTACT_RECIPIENT_EMAIL`; the sender must be verified
+in Brevo. Google Console OAuth settings are not used by this SMTP configuration.
 Never commit SMTP credentials. Keep the existing `DATABASE_URL`
 PostgreSQL configuration in place.
 
