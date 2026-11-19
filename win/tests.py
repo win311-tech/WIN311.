@@ -11,7 +11,7 @@ from .models import ContactMessage
 @override_settings(
     EMAIL_BACKEND="django.core.mail.backends.locmem.EmailBackend",
     EMAIL_HOST="smtp-relay.brevo.com",
-    EMAIL_PORT=587,
+    EMAIL_PORT=2525,
     EMAIL_HOST_USER="test-smtp-login",
     EMAIL_HOST_PASSWORD="test-smtp-key",
     EMAIL_USE_TLS=True,
