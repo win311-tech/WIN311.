@@ -167,6 +167,12 @@ if EMAIL_USE_TLS and EMAIL_USE_SSL:
     raise ImproperlyConfigured(
         "BREVO_SMTP_USE_TLS and BREVO_SMTP_USE_SSL cannot both be enabled."
     )
-DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "").strip()
-CONTACT_RECIPIENT_EMAIL = os.environ.get("CONTACT_RECIPIENT_EMAIL", "").strip()
+DEFAULT_FROM_EMAIL = (
+    os.environ.get("DEFAULT_FROM_EMAIL", "win311tech@gmail.com").strip()
+    or "win311tech@gmail.com"
+)
+CONTACT_RECIPIENT_EMAIL = (
+    os.environ.get("CONTACT_RECIPIENT_EMAIL", "win311tech@gmail.com").strip()
+    or "win311tech@gmail.com"
+)
 EMAIL_TIMEOUT = int(os.environ.get("EMAIL_TIMEOUT", "10"))
