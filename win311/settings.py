@@ -154,7 +154,7 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = os.environ.get(
     "BREVO_SMTP_HOST", "smtp-relay.brevo.com"
 ).strip()
-EMAIL_PORT = int(os.environ.get("BREVO_SMTP_PORT", "587"))
+EMAIL_PORT = int(os.environ.get("BREVO_SMTP_PORT", "2525"))
 EMAIL_HOST_USER = os.environ.get("BREVO_SMTP_LOGIN", "").strip()
 EMAIL_HOST_PASSWORD = os.environ.get("BREVO_SMTP_KEY", "")
 EMAIL_USE_TLS = os.environ.get(

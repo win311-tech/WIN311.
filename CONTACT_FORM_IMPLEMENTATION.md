@@ -25,7 +25,7 @@ Configure these values in the deployment environment (Render's environment
 settings are declared in `render.yaml`):
 
 - `BREVO_SMTP_HOST` (defaults to `smtp-relay.brevo.com`)
-- `BREVO_SMTP_PORT` (defaults to `587`)
+- `BREVO_SMTP_PORT` (defaults to `2525`; Render Free blocks outbound SMTP on port `587`)
 - `BREVO_SMTP_LOGIN`
 - `BREVO_SMTP_KEY` (Brevo SMTP key, not the API key)
 - `BREVO_SMTP_USE_TLS`
