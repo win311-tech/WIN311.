@@ -1,57 +1,27 @@
+from dataclasses import dataclass
 import logging
+from smtplib import SMTPException
 
-import requests
 from django.conf import settings
+from django.core.mail import EmailMultiAlternatives, get_connection
+from django.templatetags.static import static
+from django.template.loader import render_to_string
 
 from win.models import ContactMessage
 
 logger = logging.getLogger(__name__)
 
+DIVISION_LABELS = {
+    "general": "General enquiry",
+    "systems": "WIN311 Systems",
+    "services": "WIN311 Services",
+}
 
-def send_contact_email(validated_data):
-    """Send a contact form submission through Brevo's transactional API."""
-    if not settings.BREVO_API_KEY:
-        logger.error("Contact email is not configured: BREVO_API_KEY is missing")
-        return False
 
-    division = dict((
-        ("systems", "WIN311 Systems"),
-        ("services", "WIN311 Services"),
-        ("general", "General enquiry"),
-    )).get(validated_data.get("division"), "General enquiry")
-    lines = [
-        f"Name: {validated_data['name']}",
-        f"Email: {validated_data['email']}",
-        f"Organisation: {validated_data.get('organisation') or 'Not provided'}",
-        f"Area: {division}",
-    ]
-    if validated_data.get("category"):
-        lines.append(f"Service: {validated_data['category']}")
-    lines.extend(("", "Message:", validated_data["message"]))
-    payload = {
-        "sender": {
-            "name": settings.BREVO_SENDER_NAME,
-            "email": settings.BREVO_SENDER_EMAIL,
-        },
-        "to": [{"email": settings.CONTACT_RECIPIENT_EMAIL}],
-        "replyTo": {"email": validated_data["email"], "name": validated_data["name"]},
-        "subject": f"Website enquiry from {validated_data['name']}",
-        "textContent": "\n".join(lines),
-    }
-    try:
-        response = requests.post(
-            "https://api.brevo.com/v3/smtp/email",
-            headers={"api-key": settings.BREVO_API_KEY, "accept": "application/json"},
-            json=payload,
-            timeout=15,
-        )
-        response.raise_for_status()
-        return True
-    except requests.RequestException as exc:
-        # Log only the provider response/status, never request headers or API key.
-        status = exc.response.status_code if exc.response is not None else "unavailable"
-        logger.exception("Brevo could not send contact email (HTTP %s)", status)
-        return False
+@dataclass(frozen=True)
+class ContactSubmissionResult:
+    delivered: bool
+    error_code: str = ""
 
 
 def store_contact_message(validated_data, ip_address=None):
@@ -64,3 +34,86 @@ def store_contact_message(validated_data, ip_address=None):
         message=validated_data["message"],
         ip_address=ip_address,
     )
+
+
+def send_contact_emails(contact_message, request=None):
+    required_settings = {
+        "BREVO_SMTP_HOST": settings.EMAIL_HOST,
+        "BREVO_SMTP_LOGIN": settings.EMAIL_HOST_USER,
+        "BREVO_SMTP_KEY": settings.EMAIL_HOST_PASSWORD,
+        "DEFAULT_FROM_EMAIL": settings.DEFAULT_FROM_EMAIL,
+        "CONTACT_RECIPIENT_EMAIL": settings.CONTACT_RECIPIENT_EMAIL,
+    }
+    missing_settings = [
+        name for name, value in required_settings.items() if not value
+    ]
+    if missing_settings:
+        logger.error(
+            "Contact email delivery is not configured; missing: %s.",
+            ", ".join(missing_settings),
+        )
+        return ContactSubmissionResult(False, "not_configured")
+
+    try:
+        favicon_path = static("images/favicon-email.png")
+    except ValueError:
+        favicon_path = (
+            f"{settings.STATIC_URL.rstrip('/')}/images/favicon-email.png"
+        )
+    context = {
+        "submission": contact_message,
+        "division_label": DIVISION_LABELS.get(
+            contact_message.division, contact_message.division
+        ),
+        "favicon_url": (
+            request.build_absolute_uri(favicon_path) if request else favicon_path
+        ),
+    }
+    notification_text = render_to_string(
+        "emails/contact_notification.txt", context
+    )
+    notification_html = render_to_string(
+        "emails/contact_notification.html", context
+    )
+    acknowledgement_text = render_to_string(
+        "emails/contact_acknowledgement.txt", context
+    )
+    acknowledgement_html = render_to_string(
+        "emails/contact_acknowledgement.html", context
+    )
+
+    acknowledgement = EmailMultiAlternatives(
+        subject="We received your enquiry — WIN311",
+        body=acknowledgement_text,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[contact_message.email],
+    )
+    acknowledgement.attach_alternative(acknowledgement_html, "text/html")
+
+    notification = EmailMultiAlternatives(
+        subject="New enquiry from the WIN311 contact form",
+        body=notification_text,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[settings.CONTACT_RECIPIENT_EMAIL],
+        reply_to=[contact_message.email],
+    )
+    notification.attach_alternative(notification_html, "text/html")
+
+    connection = get_connection(fail_silently=False)
+    try:
+        sent_count = connection.send_messages([acknowledgement, notification])
+    except (OSError, SMTPException) as exc:
+        logger.error("Contact email delivery failed (%s).", type(exc).__name__)
+        return ContactSubmissionResult(False, "delivery_failed")
+
+    if sent_count != 2:
+        logger.error("Brevo SMTP accepted %s of 2 contact emails.", sent_count)
+        return ContactSubmissionResult(False, "delivery_incomplete")
+
+    logger.info("Brevo SMTP accepted the acknowledgement and notification.")
+    return ContactSubmissionResult(True)
+
+
+def submit_contact_message(validated_data, ip_address=None, request=None):
+    contact_message = store_contact_message(validated_data, ip_address)
+    return send_contact_emails(contact_message, request=request)

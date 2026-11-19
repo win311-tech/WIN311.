@@ -15,7 +15,14 @@ class ContactForm(forms.Form):
     name = forms.CharField(max_length=150)
     email = forms.EmailField()
     organisation = forms.CharField(max_length=180, required=False)
-    division = forms.ChoiceField(choices=(('systems', 'WIN311 Systems'), ('services', 'WIN311 Services'), ('general', 'General enquiry')))
+    division = forms.ChoiceField(
+        choices=(
+            ('general', 'General enquiry'),
+            ('systems', 'WIN311 Systems'),
+            ('services', 'WIN311 Services'),
+        ),
+        initial='general',
+    )
     category = forms.ChoiceField(choices=(('', 'Choose a service (optional)'),) + SERVICE_CATEGORIES, required=False)
     message = forms.CharField(widget=forms.Textarea)
 
